@@ -21,14 +21,20 @@ def draw_points(image, results):
 
 def draw_styled_points(image, results):
     mp_draw.draw_landmarks(image, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS,
-                            mp_draw.DrawingSpec(color=(), thickness=1, circle_radius=1),#landmark color
-                            mp_draw.DrawingSpec(color=(), thickness=1, circle_radius=1))#connection color
+                            mp_draw.DrawingSpec(color=(70,3,164), thickness=1, circle_radius=1),#landmark color
+                            mp_draw.DrawingSpec(color=(255,255,255), thickness=1, circle_radius=1))#connection color
     
-    mp_draw.draw_landmarks(image, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
+    mp_draw.draw_landmarks(image, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS,
+                            mp_draw.DrawingSpec(color=(84, 44, 44), thickness=1, circle_radius=1),
+                            mp_draw.DrawingSpec(color=(255,255,255), thickness=1, circle_radius=1))
     
-    mp_draw.draw_landmarks(image, results.face_landmarks, mp_holistic.FACEMESH_TESSELATION)
+    mp_draw.draw_landmarks(image, results.face_landmarks, mp_holistic.FACEMESH_TESSELATION,
+        mp_draw.DrawingSpec(color=(255,170,170), thickness=1, circle_radius=1),
+                            mp_draw.DrawingSpec(color=(255,255,255), thickness=1, circle_radius=1))
     
-    mp_draw.draw_landmarks(image, results.pose_landmarks, mp_holistic.POSE_CONNECTIONS)
+    mp_draw.draw_landmarks(image, results.pose_landmarks, mp_holistic.POSE_CONNECTIONS,
+                            mp_draw.DrawingSpec(color=(42,43,42), thickness=1, circle_radius=1),
+                            mp_draw.DrawingSpec(color=(255,255,255), thickness=1, circle_radius=1))
 
 cap = cv.VideoCapture(0)
 with mp_holistic.Holistic(min_detection_confidence= 0.5, min_tracking_confidence= 0.5) as holistic:
