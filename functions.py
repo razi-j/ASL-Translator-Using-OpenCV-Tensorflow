@@ -16,11 +16,14 @@ class VM:
     def build_folder():
         for a in VM.fsl:
             for sequences in range(VM.seq):
-                try:
-                    os.makedirs(os.path.join(VM.DATA_PATH, a, str(sequences)))
-                except:
-                    pass
-
+                if os.path.exists(os.path.join(VM.DATA_PATH, a)):
+                    print("Directory Already Exists")
+                    break
+                else:
+                    try:
+                        os.makedirs(os.path.join(VM.DATA_PATH, a, str(sequences)))
+                    except:
+                        pass
 
     def point_detection(image, model): #image from cv; holistic model from mp
         image = cv.cvtColor(image, cv.COLOR_BGR2RGB) #process color and flip
