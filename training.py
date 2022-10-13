@@ -31,7 +31,7 @@ def collect_data():
                                         cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv.LINE_AA)
                                     # Show to screen
                             cv.imshow('VertoMotus', img)
-                            cv.waitKey(5000)
+                            cv.waitKey(3000)
                         else: 
                             cv.putText(img, 'Collecting frames for {} Video Number {}'.format(a, sequence), (15,12), 
                                             cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv.LINE_AA)
