@@ -9,7 +9,7 @@ class VM:
     mp_draw = mp.solutions.drawing_utils
     DATA_PATH = os.path.join("Model_Data")
 
-    fsl = np.array(["I'm sorry"]) #things to put here: asl words, phrases
+    fsl = np.array(["you are beautiful"]) #things to put here: asl words, phrases
     seq = 30 # number of videos to be used for data collection
     seq_lenght = 30 # number of frames to be used per video
 
