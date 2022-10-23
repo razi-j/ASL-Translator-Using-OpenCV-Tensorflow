@@ -2,6 +2,9 @@ import cv2 as cv
 import mediapipe as mp
 import numpy as np
 import time
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Flatten
 import os
 
 class VM: 
@@ -60,8 +63,7 @@ class VM:
         return a
 
 
-    @classmethod
-    def load_weights(cls):
+    def load_weights():
         # model rebuild
         model = Sequential()
         model.add(LSTM(64, return_sequences="True", activation="relu", input_shape=(30, 1662)))
@@ -77,3 +79,4 @@ class VM:
 
         # load
         model.load_weights('VertoMotus_MLmodel.h5')
+        return model
