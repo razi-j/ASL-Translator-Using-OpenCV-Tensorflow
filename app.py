@@ -4,13 +4,15 @@ from functions import VM
 import numpy as np
 import os 
 from tensorflow.keras.models import load_model
-
-sequence =[]
-threshold = 0.4
-sentence =[]
-signs = os.listdir("Model_Data/")
+import tensorflow as tf
             
 def main():
+    sequence =[]
+    threshold = 0.4
+    sentence =[]
+    signs = os.listdir("Model_Data/")
+
+
     cap = cv.VideoCapture(0)
     with VM.mp_holistic.Holistic(min_detection_confidence= 0.5, min_tracking_confidence= 0.5) as holistic:
         while cap.isOpened():
@@ -22,15 +24,15 @@ def main():
             VM.draw_styled_points(img, results)
             # displays camera feed with landmarks
             
-            model = load_model()
+            interpreter = tf.lite.Interpreter(model_path="LiteML.tflite")
 
             keypoints = VM.extract_keypoints(results)
             sequence.append(keypoints)
             sequence = sequence[-30:]
 
-            if len(sequence) == 30:
-                res = model.predict(np.expand_dims(sequence, axis=0))[0]
-                print(signs[np.argmax(res)])
+            #if len(sequence) == 30:
+            #    res = model.predict(np.expand_dims(sequence, axis=0))[0]
+            #   print(signs[np.argmax(res)])
 
             end = time.time()
             fps = 1/(end-start)
