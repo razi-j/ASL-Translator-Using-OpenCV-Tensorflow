@@ -2,7 +2,7 @@ import cv2 as cv
 import mediapipe as mp
 import numpy as np
 import time
-import tensorflow
+import tensorflow as tf
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import LSTM, Dense, Flatten
@@ -60,7 +60,7 @@ class VM:
         face = np.array([[res.x,res.y,res.z] for res in results.face_landmarks.landmark]).flatten() if results.face_landmarks else np.zeros(468*3)
         
         # puts all data into one array
-        a = np.concatenate([lh, rh, pose, face])
+        a = np.concatenate([lh, rh, pose, face], dtype=np.float32)
         return a
 
 
@@ -83,8 +83,8 @@ class VM:
         return S
 
     def convert():
-        model = load_model("./VertoMotus_MLmodel.h5")
-        converter = tensorflow.lite.TFLiteConverter.from_keras_model(model)
+        model = load_model("./VertoMotus_MLmodel2.h5")
+        converter = tf.lite.TFLiteConverter.from_keras_model(model)
         converter.target_spec.supported_ops = [
             tf.lite.OpsSet.TFLITE_BUILTINS, # enable TensorFlow Lite ops.
             tf.lite.OpsSet.SELECT_TF_OPS # enable TensorFlow ops.
@@ -94,5 +94,9 @@ class VM:
         with open("./VertoMotus.tflite","wb") as f:
             f.write(tfLite_Model)
 
-#if __name__ == "__main__":
-    #VM.convert()
+
+    def get_key(dict, value):
+        return dict[value]
+
+if __name__ == "__main__":
+    VM.convert()
