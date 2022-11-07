@@ -3,18 +3,24 @@ import time
 from functions import VM
 import numpy as np
 import os 
-from tensorflow.keras.models import load_model
 import tensorflow as tf
-            
+
+
 def main():
+    # Needed Variables for Detection
     sequence =[]
     threshold = 0.4
     sentence =[]
     signs = os.listdir("Model_Data/")
-
+    
+    
+    # Initialization of TFLite Model
+    #interpreter = tf.lite.Interpreter(model_path="LiteML.tflite")
+    #interpreter.allocate_tensors()
 
     cap = cv.VideoCapture(0)
     with VM.mp_holistic.Holistic(min_detection_confidence= 0.5, min_tracking_confidence= 0.5) as holistic:
+        # Main Loop
         while cap.isOpened():
             start = time.time()
             ret, img = cap.read()
@@ -24,16 +30,11 @@ def main():
             VM.draw_styled_points(img, results)
             # displays camera feed with landmarks
             
-            interpreter = tf.lite.Interpreter(model_path="LiteML.tflite")
-
-            keypoints = VM.extract_keypoints(results)
-            sequence.append(keypoints)
+            keypoints = VM.extract_keypoints(results) # Extract Keypoints to be used to predict actions
+            sequence.append(keypoints) # Append Keypoints to Variable
             sequence = sequence[-30:]
 
-            #if len(sequence) == 30:
-            #    res = model.predict(np.expand_dims(sequence, axis=0))[0]
-            #   print(signs[np.argmax(res)])
-
+            
             end = time.time()
             fps = 1/(end-start)
             
