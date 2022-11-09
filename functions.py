@@ -13,7 +13,7 @@ class VM:
     mp_draw = mp.solutions.drawing_utils
     DATA_PATH = os.path.join("./Data")
 
-    fsl = np.array(["hello", "hi", "how are you", "how old are you", "i love you", "i am sorry", "please", "see you", "thank you, wait", "what is your name", "you are beautiful", "you are welcome"]) #things to put here: asl words, phrases
+    fsl = np.array(["hi"]) #things to put here: asl words, phrases
     seq = 50 # number of videos to be used for data collection
     seq_lenght = 30 # number of frames to be used per video
 
