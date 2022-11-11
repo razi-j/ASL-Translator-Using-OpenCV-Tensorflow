@@ -12,10 +12,9 @@ def main():
     threshold = 0.7
     sentence =[]
     predictions = []
-    signs = (os.listdir("Data/"))
-    print(signs)
+    signs = sorted(os.listdir("Data/"))
     # Initialization of TFLite Model
-    interpreter = tf.lite.Interpreter(model_path="VertoMotus2.tflite")
+    interpreter = tf.lite.Interpreter(model_path="VertoMotus3.tflite")
     interpreter.allocate_tensors()
 
    
