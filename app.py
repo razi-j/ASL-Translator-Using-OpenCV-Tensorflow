@@ -9,13 +9,13 @@ import tensorflow as tf
 def main():
     # Needed Variables for Detection
     sequence =[]
-    threshold = 0.8
+    threshold = 0.7
     sentence =[]
     predictions = []
-    signs = sorted(os.listdir("Model_Data/"))
+    signs = (os.listdir("Data/"))
     print(signs)
     # Initialization of TFLite Model
-    interpreter = tf.lite.Interpreter(model_path="VertoMotus.tflite")
+    interpreter = tf.lite.Interpreter(model_path="VertoMotus2.tflite")
     interpreter.allocate_tensors()
 
    
@@ -44,9 +44,7 @@ def main():
                 interpreter.invoke()
                 output_data = interpreter.get_tensor(output_d[0]["index"])
                 res = np.argmax(np.squeeze(output_data))
-                if res >= threshold:
-                    print(VM.fsl[res])
-                
+                print(signs[res])
                 
 
             end = time.time()

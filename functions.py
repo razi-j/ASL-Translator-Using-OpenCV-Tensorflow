@@ -82,7 +82,7 @@ class VM:
         return S
 
     def convert():
-        model = load_model("./VertoMotus_MLmodel2.h5")
+        model = load_model("./VertoMotus_MLmodel3.h5")
         converter = tf.lite.TFLiteConverter.from_keras_model(model)
         converter.target_spec.supported_ops = [
             tf.lite.OpsSet.TFLITE_BUILTINS, # enable TensorFlow Lite ops.
@@ -90,7 +90,7 @@ class VM:
         ]
         tfLite_Model = converter.convert()
 
-        with open("./VertoMotus.tflite","wb") as f:
+        with open("./VertoMotus2.tflite","wb") as f:
             f.write(tfLite_Model)
 
 
@@ -98,4 +98,4 @@ class VM:
         return dict[value]
 
 if __name__ == "__main__":
-    VM.build_folder()
+    VM.convert()
