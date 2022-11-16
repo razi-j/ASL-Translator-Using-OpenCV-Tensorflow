@@ -12,10 +12,10 @@ def main():
     threshold = 0.7
     sentence =[]
     predictions = []
-    signs = sorted(os.listdir("Data/"))
+    #signs = sorted(os.listdir("Data/"))
     # Initialization of TFLite Model
-    interpreter = tf.lite.Interpreter(model_path="VertoMotus3.tflite")
-    interpreter.allocate_tensors()
+    #interpreter = tf.lite.Interpreter(model_path="VertoMotus3.tflite")
+    #interpreter.allocate_tensors()
 
    
 
@@ -32,18 +32,18 @@ def main():
             # displays camera feed with landmarks
             
             keypoints = VM.extract_keypoints(results) # Extract Keypoints to be used to predict actions
-            sequence.append(keypoints) # Append Keypoints to Variable
-            sequence = sequence[-30:]
+            #sequence.append(keypoints) # Append Keypoints to Variable
+            #sequence = sequence[-30:]
 
-            input_d = interpreter.get_input_details()
-            output_d = interpreter.get_output_details()
+            #input_d = interpreter.get_input_details()
+            #output_d = interpreter.get_output_details()
 
-            if len(sequence) == 30:
-                interpreter.set_tensor(input_d[0]["index"], np.array(np.expand_dims(sequence,axis=0), dtype=np.float32))
-                interpreter.invoke()
-                output_data = interpreter.get_tensor(output_d[0]["index"])
-                res = np.argmax(np.squeeze(output_data))
-                print(signs[res])
+            #if len(sequence) == 30:
+            #    interpreter.set_tensor(input_d[0]["index"], np.array(np.expand_dims(sequence,axis=0), dtype=np.float32))
+            #    interpreter.invoke()
+            #    output_data = interpreter.get_tensor(output_d[0]["index"])
+            #    res = np.argmax(np.squeeze(output_data))
+            #    print(signs[res])
                 
 
             end = time.time()

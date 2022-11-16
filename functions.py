@@ -53,14 +53,27 @@ class VM:
         
     def extract_keypoints(results):
         # list comprehension to loop over results and get needed data, then arranged to np.array. flattened to turn it into one array. else is to make a placeholder
-        pose = np.array([[res.x,res.y,res.z,res.visibility] for res in results.pose_landmarks.landmark]).flatten() if results.pose_landmarks else np.zeros(33*4)
+
+
         lh = np.array([[res.x,res.y,res.z] for res in results.left_hand_landmarks.landmark]).flatten() if results.left_hand_landmarks else np.zeros(21*3)
         rh = np.array([[res.x,res.y,res.z] for res in results.right_hand_landmarks.landmark]).flatten() if results.right_hand_landmarks else np.zeros(21*3)
         face = np.array([[res.x,res.y,res.z] for res in results.face_landmarks.landmark]).flatten() if results.face_landmarks else np.zeros(468*3)
         
         # puts all data into one array
-        a = np.concatenate([lh, rh, pose, face])
+        a = np.concatenate([face, lh, rh])
+
+        lm_list = []
+
+        for lm in a:
+            base = a[0]
+            lm_list.append(lm - base)
+        lm_list = np.array(lm_list, dtype=np.float32)
+        
+        
+        #print(lm_list[1405])
+        print(lm_list[0])
         return a
+        
 
 
     def load():
