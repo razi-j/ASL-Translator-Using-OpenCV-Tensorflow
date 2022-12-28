@@ -12,9 +12,9 @@ def main():
     threshold = 0.9
     sentence =[]
     predictions = []
-    signs = sorted(os.listdir("try_data/"))
+    signs = sorted(os.listdir("Keypoint_Data/"))
     # Initialization of TFLite Model
-    interpreter = tf.lite.Interpreter(model_path="normalized_data.tflite")
+    interpreter = tf.lite.Interpreter(model_path="VertoMotusLite.tflite")
     interpreter.allocate_tensors()
     input_d = interpreter.get_input_details()
     output_d = interpreter.get_output_details()
@@ -44,7 +44,7 @@ def main():
                 pred  = np.squeeze(output_data)
                 for i in pred:
                     if i >= threshold:
-                        res = np.argmax(np.squeeze(output_data))
+                        res = np.argmax(pred)
                         print(signs[res])
 
             end = time.time()
