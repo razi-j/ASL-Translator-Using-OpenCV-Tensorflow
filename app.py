@@ -11,7 +11,7 @@ def main():
     sequence =[]
     threshold = 0.9
     sentence =[]
-    predictions = []
+    words = []
     signs = sorted(os.listdir("Keypoint_Data/"))
     # Initialization of TFLite Model
     interpreter = tf.lite.Interpreter(model_path="VertoMotusLite.tflite")
@@ -42,11 +42,10 @@ def main():
                 interpreter.invoke()
                 output_data = interpreter.get_tensor(output_d[0]["index"])
                 pred  = np.squeeze(output_data)
-                for i in pred:
-                    if i >= threshold:
-                        res = np.argmax(pred)
-                        print(signs[res])
-
+                res = np.argmax(pred)
+                if res >= threshold:
+                    word = signs[res]
+                    print(word)
             end = time.time()
             fps = 1/(end-start)
             

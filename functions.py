@@ -5,6 +5,7 @@ import time
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 import os
+import pyttsx3
 
 class VM: 
     mp_holistic = mp.solutions.holistic
@@ -14,6 +15,7 @@ class VM:
     fsl = np.array(["i'm sorry"]) #things to put here: asl words, phrases
     seq = 50 # number of videos to be used for data collection
     seq_lenght = 30 # number of frames to be used per video
+    
 
     def build_folder():
         for a in VM.fsl:
@@ -78,6 +80,10 @@ class VM:
         #   Write Model to tflite file
         with open("./VertoMotus2.tflite","wb") as f:
             f.write(tfLite_Model)
+    def tts(text):
+        vclient = pyttsx3.init()
+        vclient.say(text)
+        vclient.runAndWait()
 
 if __name__ == "__main__":
     VM.convert()
