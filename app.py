@@ -42,10 +42,9 @@ def main():
                 interpreter.invoke()
                 output_data = interpreter.get_tensor(output_d[0]["index"])
                 pred  = np.squeeze(output_data)
-                for i in pred:
-                    if i >= threshold:
-                        res = np.argmax(pred)
-                        print(signs[res])
+                res = np.argmax(pred)
+                if pred[res] >= threshold:
+                    print(signs[res])
 
             end = time.time()
             fps = 1/(end-start)
