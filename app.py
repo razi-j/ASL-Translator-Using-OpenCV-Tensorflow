@@ -55,7 +55,7 @@ def main():
             
             end = time.time()
             fps = 1/(end-start)
-            
+            #
             img = cv.flip(img,1)
             cv.putText(img,f'FPS: {int(fps)}', (20, 70), cv.FONT_HERSHEY_PLAIN, 1.5, (0,255,0), 2)
             cv.imshow("VertoMotus", img)
