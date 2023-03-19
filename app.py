@@ -23,6 +23,7 @@ def main():
     cap = cv.VideoCapture(0)
     with VM.mp_holistic.Holistic(min_detection_confidence= 0.5, min_tracking_confidence= 0.5) as holistic:
         # Main Loop
+
         while cap.isOpened():
             start = time.time()
             ret, img = cap.read()
@@ -42,11 +43,16 @@ def main():
                 interpreter.invoke()
                 output_data = interpreter.get_tensor(output_d[0]["index"])
                 pred  = np.squeeze(output_data)
-                for i in pred:
-                    if i >= threshold:
-                        res = np.argmax(pred)
-                        print(signs[res])
-
+                
+                #res = np.argmax(pred)
+                predictions.append(np.argmax(pred))
+                if np.unique(predictions[-20:])[0] ==np.argmax(pred):
+                    if pred[np.argmax(pred)] > threshold:
+                        #print(signs[np.argmax(pred)])
+                        print(pred, np.argmax(pred))
+                else:
+                    predictions.clear()
+            
             end = time.time()
             fps = 1/(end-start)
             
