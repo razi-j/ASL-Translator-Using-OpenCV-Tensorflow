@@ -42,9 +42,9 @@ class VM:
                                 VM.mp_draw.DrawingSpec(color=(84, 44, 44), thickness=2, circle_radius=3),
                                 VM.mp_draw.DrawingSpec(color=(255,255,255), thickness=2, circle_radius=1))
         
-        VM.mp_draw.draw_landmarks(image, results.face_landmarks, VM.mp_holistic.FACEMESH_TESSELATION,
-                                VM.mp_draw.DrawingSpec(color=(255,170,170), thickness=1, circle_radius=1),
-                                VM.mp_draw.DrawingSpec(color=(255,255,255), thickness=1, circle_radius=1))
+        #VM.mp_draw.draw_landmarks(image, results.face_landmarks, VM.mp_holistic.FACEMESH_TESSELATION,
+        #                        VM.mp_draw.DrawingSpec(color=(255,170,170), thickness=1, circle_radius=1),
+        #                        VM.mp_draw.DrawingSpec(color=(255,255,255), thickness=1, circle_radius=1))
 
     def extract_keypoints(results):
         # list comprehension to loop over results and get needed data, then arranged to np.array. flattened to turn it into one array. else is to make a placeholder
