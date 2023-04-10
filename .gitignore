@@ -1,4 +1,2 @@
-test.txt
-try.csv
-hakdog.csv
-check.py
+__pycache__/
+*.pyc
