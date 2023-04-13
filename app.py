@@ -11,7 +11,7 @@ def main():
     # Needed Variables for Detection
     sequence =[]
     threshold = 0.9
-    sentence =[]
+    toCSV=[]
     predictions = []
     signs = sorted(os.listdir("Keypoint_Data/"))
     # Initialization of TFLite Model
@@ -51,9 +51,12 @@ def main():
                         predictions.append(np.argmax(pred))
                         if np.unique(predictions[-10:])[0] == np.argmax(pred):
                             if pred[np.argmax(pred)] > threshold:
-                                print(pred, pred[np.argmax(pred)],signs[np.argmax(pred)])
-         
-                else: pass
+                                print(pred[np.argmax(pred)],signs[np.argmax(pred)])
+                                toCSV.append(signs[np.argmax(pred)])
+
+                else:pass 
+                    #predictions.clear()
+                    #print()
             except: pass
 
             end = time.time()
