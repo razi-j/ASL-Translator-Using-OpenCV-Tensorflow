@@ -15,7 +15,7 @@ def main():
     predictions = []
     signs = sorted(os.listdir("Keypoint_Data/"))
     # Initialization of TFLite Model
-    interpreter = tf.lite.Interpreter(model_path="VertoMotus.tflite")
+    interpreter = tf.lite.Interpreter(model_path="Model.tflite")
     interpreter.allocate_tensors()
     input_d = interpreter.get_input_details()
     output_d = interpreter.get_output_details()

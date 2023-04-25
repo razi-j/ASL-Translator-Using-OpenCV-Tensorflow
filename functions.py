@@ -66,7 +66,7 @@ class VM:
             lm_list.append(lm - base) 
         lm_list = np.array(lm_list, dtype=np.float32)
 
-        return a
+        return lm_list
 
     def convert():
         #  Load Model
