@@ -21,7 +21,7 @@ def main():
     output_d = interpreter.get_output_details()
     
     print(signs)
-    cap = cv.VideoCapture(2)
+    cap = cv.VideoCapture(0)
     with VM.mp_holistic.Holistic(min_detection_confidence= 0.5, min_tracking_confidence= 0.5) as holistic:
         # Main Loop
 
