@@ -15,13 +15,13 @@ def main():
     predictions = []
     signs = sorted(os.listdir("Keypoint_Data/"))
     # Initialization of TFLite Model
-    interpreter = tf.lite.Interpreter(model_path="Model.tflite")
+    interpreter = tf.lite.Interpreter(model_path="VertoMotus2.tflite")
     interpreter.allocate_tensors()
     input_d = interpreter.get_input_details()
     output_d = interpreter.get_output_details()
     
     print(signs)
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture(2)
     with VM.mp_holistic.Holistic(min_detection_confidence= 0.5, min_tracking_confidence= 0.5) as holistic:
         # Main Loop
 
