@@ -4,11 +4,19 @@ from functions import VM
 import numpy as np
 import os 
 import tensorflow as tf
+import pyttsx3
 
+def tts(sentence):
+    tts = pyttsx3.init()
+    tts.connect('started-utterance', main)
+    tts.setProperty('rate', 130)
+    tts.say(sentence)
+    tts.runAndWait()
 
 
 def main():
     # Needed Variables for Detection
+    previous_word = None
     sequence =[]
     threshold = 0.9
     sentence =[]
@@ -51,8 +59,17 @@ def main():
                         predictions.append(np.argmax(pred))
                         if np.unique(predictions[-10:])[0] == np.argmax(pred):
                             if pred[np.argmax(pred)] > threshold:
-                                print(pred, pred[np.argmax(pred)],signs[np.argmax(pred)])
-         
+                                #print(pred, pred[np.argmax(pred)],signs[np.argmax(pred)])
+                                word = signs[np.argmax(pred)]
+                                sentence.append(word)
+                                print(word)
+                if word != previous_word:
+                    if len(sentence) >= 20:
+                        if np.unique(sentence[-20:]) == word:
+                            tts(word)
+                            previous_word = word
+                            word = None
+                
                 else: pass
             except: pass
 
